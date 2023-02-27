@@ -1,13 +1,53 @@
 `use strict`;
 
+import ParticleSystem from "./modules/particleSystem.js";
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+class Pallo {
+  constructor(x, y, movementX, movementY, radius) {
+    this.x = x;
+    this.y = y;
+    this.movementX = movementX;
+    this.movementY = movementY;
+    this.radius = radius;
+  }
+}
+
 function main() {
-  const canvas = document.getElementById(`canvas`);
+  const canvas = document.querySelector(`canvas`);
 
   const width = window.innerWidth;
   const height = window.innerHeight;
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext(`2d`);
+
+  const pallot = [];
+
+  let i = 0;
+  while (i < 10) {
+    const pallo = new Pallo(
+      getRandomInt(0, window.innerWidth),
+      getRandomInt(0, window.innerHeight),
+      1,
+      1,
+      100
+    );
+    pallot.push(pallo);
+    i++;
+  }
+
+  const particleSystem = new ParticleSystem(
+    ctx,
+    window.innerWidth,
+    window.innerHeight,
+    pallot
+  );
 
   const imageData = ctx.createImageData(width, height);
   const data = imageData.data;
@@ -29,6 +69,16 @@ function main() {
     }
   }
   ctx.putImageData(imageData, 0, 0);
+
+  function animate() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    particleSystem.updateLocation();
+    particleSystem.drawParticles();
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
 }
 
 main();

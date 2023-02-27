@@ -4,10 +4,20 @@ import { getContext } from "./modules/getContext.js";
 import { loadShaders } from "./modules/loadShaders.js";
 import { compileShader } from "./modules/compileShader.js";
 import { createProgram } from "./modules/createProgram.js";
+import ParticleSystem from "./modules/particleSystem.js";
 
 async function main() {
   const vertexShaderSource = await loadShaders("/shaders/", "vertex.glsl");
   const fragmentShaderSource = await loadShaders("/shaders/", "fragment.glsl");
+
+  const proot = [1, 2, 3, 4, 5];
+  const particleSystem = new ParticleSystem(
+    window.innerWidth,
+    window.innerHeight,
+    proot
+  );
+
+  console.log(particleSystem);
 
   const gl = getContext();
 
