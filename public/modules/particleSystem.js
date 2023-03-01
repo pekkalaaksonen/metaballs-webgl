@@ -9,15 +9,15 @@ export default class ParticleSystem {
   updateLocation() {
     for (this.pallo of this.particles) {
       if (this.pallo.x <= 0 || this.pallo.x >= this.width) {
-        this.pallo.movementX *= -1;
+        this.pallo.angle = Math.PI - this.pallo.angle;
       }
 
       if (this.pallo.y <= 0 || this.pallo.y >= this.height) {
-        this.pallo.movementY *= -1;
+        this.pallo.angle = 2 * Math.PI - this.pallo.angle;
       }
 
-      this.pallo.x += this.pallo.movementX;
-      this.pallo.y += this.pallo.movementY;
+      this.pallo.x += Math.cos(this.pallo.angle) * this.pallo.velocity;
+      this.pallo.y += Math.sin(this.pallo.angle) * this.pallo.velocity;
     }
   }
 

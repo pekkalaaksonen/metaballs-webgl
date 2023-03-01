@@ -8,12 +8,20 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function toRadians(degrees) {
+  return (Math.PI / 180) * degrees;
+}
+
 class Pallo {
-  constructor(x, y, movementX, movementY, radius) {
+  constructor(x, y, angle, velocity, radius) {
     this.x = x;
     this.y = y;
-    this.movementX = movementX;
-    this.movementY = movementY;
+    this.angle = angle;
+    this.velocity = velocity;
     this.radius = radius;
   }
 }
@@ -30,17 +38,19 @@ function main() {
   const pallot = [];
 
   let i = 0;
-  while (i < 10) {
+  while (i < 2) {
     const pallo = new Pallo(
       getRandomInt(0, window.innerWidth),
       getRandomInt(0, window.innerHeight),
-      1,
-      1,
-      100
+      toRadians(getRandomNumber(0, 360)),
+      getRandomNumber(0.5, 3.0),
+      getRandomInt(1, 100)
     );
     pallot.push(pallo);
     i++;
   }
+
+  console.log(pallot);
 
   const particleSystem = new ParticleSystem(
     ctx,
