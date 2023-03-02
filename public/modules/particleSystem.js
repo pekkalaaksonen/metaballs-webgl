@@ -21,6 +21,16 @@ export default class ParticleSystem {
     }
   }
 
+  getLocationsToArray() {
+    const locs = [];
+
+    for (this.ball of this.particles) {
+      locs.push(this.ball.x), locs.push(this.ball.y);
+    }
+
+    return locs;
+  }
+
   drawParticles() {
     this.ctx.strokeStyle = "white";
 
