@@ -1,6 +1,6 @@
 #version 300 es
 precision highp float;
-uniform vec2 u_location;
+//uniform vec2 u_location;
 out vec4 outColor;
 uniform vec2 locations[40];
 

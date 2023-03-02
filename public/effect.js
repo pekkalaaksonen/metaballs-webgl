@@ -78,7 +78,7 @@ async function main() {
 
   const a_Position = gl.getAttribLocation(program, `a_Position`);
   const u_resolution = gl.getUniformLocation(program, `u_resolution`);
-  const u_location = gl.getUniformLocation(program, `u_location`);
+  //const u_location = gl.getUniformLocation(program, `u_location`);
   const locations = gl.getUniformLocation(program, `locations`);
 
   gl.enableVertexAttribArray(a_Position);
