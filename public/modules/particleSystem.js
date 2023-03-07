@@ -31,6 +31,28 @@ export default class ParticleSystem {
     return locs;
   }
 
+  getRadiusToArray() {
+    const radiusArray = [];
+
+    for (this.ball of this.particles) {
+      radiusArray.push(this.ball.radius);
+    }
+
+    return radiusArray;
+  }
+
+  getColorsToArray() {
+    const colorsArray = [];
+
+    for (this.ball of this.particles) {
+      colorsArray.push(this.ball.red),
+        colorsArray.push(this.ball.green),
+        colorsArray.push(this.ball.blue);
+    }
+
+    return colorsArray;
+  }
+
   drawParticles() {
     this.ctx.strokeStyle = "white";
 

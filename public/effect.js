@@ -30,8 +30,11 @@ async function main() {
       getRandomInt(0, window.innerWidth),
       getRandomInt(0, window.innerHeight),
       toRadians(getRandomNumber(0, 360)),
-      getRandomNumber(0.5, 10.0),
-      getRandomInt(1, 100)
+      getRandomNumber(0.5, 2.0),
+      getRandomInt(100, 500),
+      getRandomNumber(0.0, 1),
+      getRandomNumber(0.0, 1),
+      getRandomNumber(0.0, 1)
     );
     balls.push(ball);
     i++;
@@ -80,6 +83,8 @@ async function main() {
   const u_resolution = gl.getUniformLocation(program, `u_resolution`);
   //const u_location = gl.getUniformLocation(program, `u_location`);
   const locations = gl.getUniformLocation(program, `locations`);
+  const radius = gl.getUniformLocation(program, `radius`);
+  const colors = gl.getUniformLocation(program, `colors`);
 
   gl.enableVertexAttribArray(a_Position);
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
@@ -94,7 +99,11 @@ async function main() {
     //ctx.fillStyle = "black";
     particleSystem.updateLocation();
     const locationsArray = particleSystem.getLocationsToArray();
+    const radiusArray = particleSystem.getRadiusToArray();
+    const colorsArray = particleSystem.getColorsToArray();
     gl.uniform2fv(locations, locationsArray);
+    gl.uniform1fv(radius, radiusArray);
+    gl.uniform3fv(colors, colorsArray);
     //gl.uniform2f(u_location, balls[0].x, balls[0].y);
     gl.uniform2f(u_resolution, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); // Adding new vertices to first three produces additional triangles
